@@ -1,22 +1,41 @@
+use maud::{Markup, html};
 use x_post::*;
 
 pub struct HtmlPost;
 
 impl HtmlPost{
     // vector가 들어 있는 데이터 구조를 HTML로 변환하는 메서드
-    pub fn from_v_to_html(posts: XPostingList) -> MarkDown {
-        
-        MarkDown::new(html)
+    pub fn from_v_to_html(posts: XPostingList) -> Vec<MarkDown> {
+        let mut v_markdown: Vec<MarkDown>= Vec::new();
+
+        for post in posts{
+            // HTMl에 링크를 주입
+            let link= Url::get_url();
+            let markup= html!{
+                a href=(link) { "x_post" }
+            }
+            let opt_markup= Option::from(markup);
+            let parsed= match opt_markup {
+                Some(markup) => markup,
+                _ => panic!("Parsing err on post struct to Html struct")
+            }
+
+            let markdown= MarkDown::new(parsed);
+            
+            v_markdown.push(markdown);
+        }
+
+        v_markdown
     }
 }
 
 struct MarkDown{
-    html: Html,
+    htmls: Vec<maud::PreEscaped<String>>,
 }
 
 impl MarkDown{
     pub fn new(html: Html) -> Self{
-        MarkDown { html:  html }
+        MarkDown { html }
     }
 
     // HTML을 마크다운으로 변환하는 메서드
