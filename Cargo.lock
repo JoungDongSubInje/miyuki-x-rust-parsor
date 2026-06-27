@@ -93,6 +93,6 @@ checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 
 [[package]]
 name = "x-post"
-version = "0.2.4"
+version = "0.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "31b546317696d85cfb609ee662203409191350a4382c4a86906bc3a0048fa6a7"
+checksum = "95c4f07943493a0e3b95ea0ed3d54450c057e321158d0298c71e45d6bb81aa60"

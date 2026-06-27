@@ -8,17 +8,17 @@ impl HtmlPost{
     pub fn from_v_to_html(posts: XPostingList) -> Vec<MarkDown> {
         let mut v_markdown: Vec<MarkDown>= Vec::new();
 
-        for post in posts{
+        for post in posts.postings{
             // HTMl에 링크를 주입
-            let link= Url::get_url();
+            let link= Url::get_url(&post.url);
             let markup= html!{
                 a href=(link) { "x_post" }
-            }
+            };
             let opt_markup= Option::from(markup);
             let parsed= match opt_markup {
                 Some(markup) => markup,
                 _ => panic!("Parsing err on post struct to Html struct")
-            }
+            };
 
             let markdown= MarkDown::new(parsed);
             
@@ -34,8 +34,8 @@ struct MarkDown{
 }
 
 impl MarkDown{
-    pub fn new(html: Html) -> Self{
-        MarkDown { html }
+    pub fn new(htmls: Html) -> Self{
+        MarkDown { htmls }
     }
 
     // HTML을 마크다운으로 변환하는 메서드
