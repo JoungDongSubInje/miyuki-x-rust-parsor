@@ -6,3 +6,4 @@ edition = "2024"
 [dependencies]
 maud = "0.27.0"
 x-post = "0.2.5"
+uuid = { version = "1", features = ["v4", "v7", "fast-rng", "serde"] }
